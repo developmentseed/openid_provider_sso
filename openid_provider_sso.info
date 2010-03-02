@@ -1,4 +1,5 @@
-name = "OpenID Provider SSO"
+core = "6.x"
+dependencies[] = "openid_provider"
 description = "Set up a trusted web of sites and use OpenID to provide simple Sign-On."
-core = 6.x
-dependencies[] = openid_provider
+name = "OpenID Provider SSO"
+package = "OpenID"
