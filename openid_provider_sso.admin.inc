@@ -79,5 +79,5 @@ function openid_provider_sso_rps_page() {
       $edit .' | '. $remove,
     );
   }
-  return theme_table(array(t('Realm'), t('Name')), $rows);
+  return theme_table(array(t('Realm'), array('data' => t('Name'), 'colspan' => 2)), $rows);
 }
