@@ -179,6 +179,13 @@ function openid_provider_sso_mail_alter(&$message) {
 }
 
 /**
+ * Implementation of hook_views_api().
+ */
+function openid_provider_sso_views_api() {
+  return array('api' => 2);
+}
+
+/**
  * Logout page callback. Logs out and initiates new authentication request if
  * a RP realm is present in $_GET.
  */
