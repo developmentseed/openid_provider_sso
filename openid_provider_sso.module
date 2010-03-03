@@ -109,7 +109,7 @@ function openid_provider_sso_menu_alter(&$items) {
  *
  * @todo Support non-clean URLs in redirects.
  */
-function openid_provider_sso_form_alter(&$form, $form_state, $form_id) {
+function openid_provider_sso_form_alter(&$form, &$form_state, $form_id) {
   // Add redirects to Relying Party if there is a given realm.
   // On user_pass_reset stick redirect into session variable and redirect on
   // submission of user_profile_form form - this is where user_pass_reset
