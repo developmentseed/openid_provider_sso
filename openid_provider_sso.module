@@ -113,7 +113,8 @@ function openid_provider_sso_form_alter(&$form, $form_state, $form_id) {
   // Add redirects to Relying Party if there is a given realm.
   // On user_pass_reset stick redirect into session variable and redirect on
   // submission of user_profile_form form - this is where user_pass_reset
-  // redirects to. Otherwise simply add redirect to $form variable.
+  // redirects to (user_pass_reset is the one time login form).
+  //
   // When a destination is set, make sure it is kept on certain forms so that
   // the user always winds up at the RP where she started out.
   // The fundamental difference between the destination 'destination' and the
@@ -122,11 +123,8 @@ function openid_provider_sso_form_alter(&$form, $form_state, $form_id) {
   if ($form_id == 'user_pass_reset' && $rp = openid_provider_sso_relying_party($_GET['realm'])) {
     $_SESSION['openid_provider_sso_redirect'] = $rp['realm'] .'sso/init';
   }
-  elseif ($form_id == 'user_profile_form' && isset($_SESSION['openid_provider_sso_redirect'])) {
-    $form['#redirect'] = $_SESSION['openid_provider_sso_redirect'];
-    if (!empty($form_state['post'])) { // Only unset if post is set.
-      unset($_SESSION['openid_provider_sso_redirect']);
-    }
+  elseif ($form_id == 'user_profile_form') {
+    $form['#submit'][] = 'openid_provider_sso_user_submit';
   }
   elseif (in_array($form_id, array('user_register', 'user_login', 'user_pass'))) {
     if ($_GET['destination'] == 'openid/provider/continue') {
@@ -155,6 +153,21 @@ function openid_provider_sso_form_alter(&$form, $form_state, $form_id) {
       drupal_access_denied();
       exit();
     }
+  }
+}
+
+/**
+ * Custom submit handler for user profile form. Add SSO redirect to form if
+ * present.
+ *
+ * Note: Modifying $form['#redirect'] in form_alter does not work nice with
+ * Batch API.
+ */
+function openid_provider_sso_user_submit($form, &$form_state) {
+  // openid_provider_sso_form_alter has been set in openid_prover_sso_form_alter().
+  if (isset($_SESSION['openid_provider_sso_redirect'])) {
+    $form_state['redirect'] = $_SESSION['openid_provider_sso_redirect'];
+    unset($_SESSION['openid_provider_sso_redirect']);
   }
 }
 
