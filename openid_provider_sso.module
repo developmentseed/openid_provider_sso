@@ -352,14 +352,23 @@ function openid_provider_sso_relying_parties_opml() {
  */
 function openid_provider_sso_user_page() {
   if (isset($_GET['identifier'])) {
-    global $base_url;
-    $matches = array();
-    $url_escaped = str_replace("/", "\/", "{$base_url}/user/([0-9]*)/identity");
-    preg_match("/{$url_escaped}/", $_GET['identifier'], $matches);
-    if (isset($matches[1]) && is_numeric($matches[1]) && $uid = $matches[1]) {
+    if ($uid = openid_provider_sso_get_uid($_GET['identifier'])) {
       drupal_goto("user/{$uid}");
     }
   }
   drupal_not_found();
   exit;
+}
+
+/**
+ * Retrieve the UID from an openid identifier URL on *this* OpenID provider.
+ */
+function openid_provider_sso_get_uid($identifier) {
+  global $base_url;
+  $path = str_replace("{$base_url}/", '', $identifier);
+  $args = explode('/', $path);
+  if ($args[0] === 'user' && is_numeric($args[1]) && $args[2] === 'identity') {
+    return $args[1];
+  }
+  return FALSE;
 }
