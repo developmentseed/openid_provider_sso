@@ -12,6 +12,7 @@ function openid_provider_sso_rp_edit_form() {
   $form['name'] = array(
     '#type' => 'textfield',
     '#title' => t('Name'),
+    '#description' => t('The name of a trusted relying party. Use the site name.'),
     '#default_value' => empty($rp) ? '' : $rp['name'],
     '#required' => TRUE,
   );
@@ -25,6 +26,7 @@ function openid_provider_sso_rp_edit_form() {
     $form['realm'] = array(
       '#type' => 'textfield',
       '#title' => t('Realm (URL)'),
+      '#description' => t('The URL of a trusted relying party.'),
       '#default_value' => empty($rp) ? '' : $rp['realm'],
       '#required' => TRUE,
     );
@@ -40,7 +42,7 @@ function openid_provider_sso_rp_edit_form() {
  * Submit handler for openid_provider_sso_rp_edit_form().
  */
 function openid_provider_sso_rp_edit_form_submit($form, &$form_state) {
-  openid_provider_sso_rp_add($form_state['values']['realm'], $form_state['values']['name']);
+  openid_provider_sso_rp_add(trim($form_state['values']['realm'], '/') .'/', $form_state['values']['name']);
   drupal_set_message(t('Added Relying Party @realm (@name).', array('@realm' => $form_state['values']['realm'], '@name' => $form_state['values']['name'])));
 }
 
