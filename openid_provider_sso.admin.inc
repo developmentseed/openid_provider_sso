@@ -70,6 +70,7 @@ function openid_provider_sso_rp_remove_form_submit($form, &$form_state) {
  */
 function openid_provider_sso_rps_page() {
   $rps = openid_provider_sso_relying_parties();
+  $rows = array();
   foreach ($rps as $rp) {
     $edit = l(t('edit'), 'admin/settings/openid-provider-sso/edit', array('query' => 'realm='. urlencode($rp['realm'])));
     $remove = l(t('remove'), 'admin/settings/openid-provider-sso/remove', array('query' => 'realm='. urlencode($rp['realm'])));
