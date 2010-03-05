@@ -4,7 +4,7 @@
  * Edit form callback.
  */
 function openid_provider_sso_rp_edit_form() {
-  if ($_GET['realm']) {
+  if (isset($_GET['realm'])) {
     $rp = openid_provider_sso_relying_party($_GET['realm']);
   }
   $form = array();
