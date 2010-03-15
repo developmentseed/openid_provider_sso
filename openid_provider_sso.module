@@ -16,9 +16,7 @@ function openid_provider_sso_help($path) {
     case 'admin/user/openid-provider-sso':
       return t('This is a list of Relying Parties that are authorized to use this Drupal site as OpenID Simple Sign-On Provider. Users signing in to these sites will be able to use this OpenID Provider with a simplified workflow.');
     case 'admin/user/openid-provider-sso/add':
-    case 'admin/user/openid-provider-sso/add':
       return t('Add a Relying Party with OpenID Simple Sign-On support - a Drupal site with OpenID and OpenID SSO module installed and configured.');
-    case 'admin/user/openid-provider-sso/add':
     case 'admin/user/openid-provider-sso/edit':
       return t('Modify a Relying Party with OpenID Simple Sign-On support - a Drupal site with OpenID and OpenID SSO module installed and configured.');
   }
