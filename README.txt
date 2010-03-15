@@ -19,7 +19,7 @@ results.
 Installation
 ============
 
-Install this module and dependencies. Go to admin/settings/openid-provider-sso
+Install this module and dependencies. Go to admin/user/openid-provider-sso
 and enter known Relying Parties, for example:
 
 Realm: http://example1.com/

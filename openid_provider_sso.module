@@ -13,11 +13,13 @@
  */
 function openid_provider_sso_help($path) {
   switch ($path) {
-    case 'admin/settings/openid-provider-sso':
-      return t('This is a list of Relying Parties that are authorized to use this Drupal site as OpenID Simple Sign-On Provider. Users signing in to these sites will be able to use this OpenID Provider with a simplified workflow.');case 'admin/settings/openid-provider-sso/add':
-    case 'admin/settings/openid-provider-sso/add':
-      return t('Add a Relying Party with OpenID Simple Sign-On support - a Drupal site with OpenID and OpenID SSO module installed and configured.');case 'admin/settings/openid-provider-sso/add':
-    case 'admin/settings/openid-provider-sso/edit':
+    case 'admin/user/openid-provider-sso':
+      return t('This is a list of Relying Parties that are authorized to use this Drupal site as OpenID Simple Sign-On Provider. Users signing in to these sites will be able to use this OpenID Provider with a simplified workflow.');
+    case 'admin/user/openid-provider-sso/add':
+    case 'admin/user/openid-provider-sso/add':
+      return t('Add a Relying Party with OpenID Simple Sign-On support - a Drupal site with OpenID and OpenID SSO module installed and configured.');
+    case 'admin/user/openid-provider-sso/add':
+    case 'admin/user/openid-provider-sso/edit':
       return t('Modify a Relying Party with OpenID Simple Sign-On support - a Drupal site with OpenID and OpenID SSO module installed and configured.');
   }
 }
@@ -48,7 +50,7 @@ function openid_provider_sso_menu() {
     'access callback' => TRUE,
     'type' => MENU_CALLBACK,
   );
-  $items['admin/settings/openid-provider-sso'] = array(
+  $items['admin/user/openid-provider-sso'] = array(
     'title' => 'OpenID Provider Simple Sign-On',
     'description' => 'Configure allowed OpenID Relying Parties for simplified OpenID-based sign-on.',
     'page callback' => 'openid_provider_sso_rps_page',
@@ -57,12 +59,12 @@ function openid_provider_sso_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'openid_provider_sso.admin.inc',
   );
-  $items['admin/settings/openid-provider-sso/list'] = array(
+  $items['admin/user/openid-provider-sso/list'] = array(
     'title' => 'List',
     'type' => MENU_DEFAULT_LOCAL_TASK,
     'weight' => -10,
   );
-  $items['admin/settings/openid-provider-sso/add'] = array(
+  $items['admin/user/openid-provider-sso/add'] = array(
     'title' => 'Add Relying Party',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openid_provider_sso_rp_edit_form'),
@@ -71,7 +73,7 @@ function openid_provider_sso_menu() {
     'type' => MENU_LOCAL_TASK,
     'file' => 'openid_provider_sso.admin.inc',
   );
-  $items['admin/settings/openid-provider-sso/edit'] = array(
+  $items['admin/user/openid-provider-sso/edit'] = array(
     'title' => 'Edit Relying Party',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openid_provider_sso_rp_edit_form'),
@@ -80,7 +82,7 @@ function openid_provider_sso_menu() {
     'type' => MENU_NORMAL_ITEM,
     'file' => 'openid_provider_sso.admin.inc',
   );
-  $items['admin/settings/openid-provider-sso/remove'] = array(
+  $items['admin/user/openid-provider-sso/remove'] = array(
     'title' => 'Remove Relying Party',
     'page callback' => 'drupal_get_form',
     'page arguments' => array('openid_provider_sso_rp_remove_form'),
