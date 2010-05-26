@@ -19,8 +19,11 @@ results.
 Installation
 ============
 
-Install this module and dependencies. Go to admin/user/openid-provider-sso
-and enter known Relying Parties, for example:
+Install this module and dependencies. Apply 
+http://drupal.org/node/621956#comment-2665966 to OpenID Provider.
+
+Go to admin/user/openid-provider-sso and enter known Relying Parties, for 
+example:
 
 Realm: http://example1.com/
 Name: The Example 1 Blog
